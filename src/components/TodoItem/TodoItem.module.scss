@@ -1,0 +1,59 @@
+.todo {
+    display: flex;
+    margin: 4px 0;
+
+    .todo-item {
+       flex: 1;
+
+        display: flex;
+        align-items: center;
+
+        .checked {
+            opacity: 0.5;
+        }
+    }
+
+    .todo-name {
+        width: 100%;
+    }
+
+    .todo-options {
+        margin-right: 16px;
+
+        .btnUpdate {
+            background-color: rgb(62, 220, 118);
+        }
+
+        .btnDelete {
+            background-color: rgb(212, 37, 37);           
+        }
+
+        .btnUpdate,
+        .btnDelete {
+            width: 70px;
+            padding: 0 8px;
+            margin: 0 4px;
+            border: 1px solid #000;
+        }
+
+        &:not(.todo-checked) .btnUpdate:hover,
+        &:not(.todo-checked) .btnDelete:hover {
+            color: #fff;
+        }
+    }
+}
+
+.todo-checked {
+    color: #ccc;
+    position: relative;
+}
+
+.todo-checked::after {
+    position: absolute;
+    content: '';
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    border: 1px solid #ccc;
+    width: 100%;
+}

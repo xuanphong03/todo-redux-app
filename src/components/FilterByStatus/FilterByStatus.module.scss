@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+
+    .input-label {
+        padding: 0 8px 0 4px;
+    }
+
+    .wrapper-input {
+        margin-right: 8px;
+        display: flex;
+        align-items: center;
+    }
+}
