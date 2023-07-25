@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { searchFilterChange } from "../../redux/actions";
+import filtersSlice from "../Reducer/FiltersReducer/filtersSlice";
 
 const cx = classNames.bind(styles);
 
@@ -14,7 +14,7 @@ function FilterSearchText() {
 
   const handleChangeSearchTextValue = (e) => {
     setSearchText(e.target.value);
-    dispatch(searchFilterChange(e.target.value));
+    dispatch(filtersSlice.actions.searchFilterChange(e.target.value));
   };
 
   return (

@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import styles from "./FilterByStatus.module.scss";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { statusFilterChange } from "../../redux/actions";
+import filtersSlice from "../Reducer/FiltersReducer/filtersSlice";
 
 const cx = classNames.bind(styles);
 
@@ -12,7 +12,7 @@ function FilterByStatus() {
 
   const handleChange = (e) => {
     setFilterStatus(e.target.value);
-    dispatch(statusFilterChange(e.target.value));
+    dispatch(filtersSlice.actions.statusFilterChange(e.target.value));
   };
 
   return (

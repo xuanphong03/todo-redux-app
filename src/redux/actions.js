@@ -21,9 +21,9 @@ export const removeTodo = (id) => {
   };
 };
 
-export const completeTodo = (id) => {
+export const toggleTodoStatus = (id) => {
   return {
-    type: "todoList/completeTodo",
+    type: "todoList/toggleTodoStatus",
     payload: id,
   };
 };

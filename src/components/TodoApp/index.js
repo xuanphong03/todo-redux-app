@@ -5,18 +5,17 @@ import styles from "./TodoApp.module.scss";
 import FilterSearchText from "../FilterSearchText";
 import FilterByStatus from "../FilterByStatus";
 import TodoItem from "../TodoItem";
-import { addTodo } from "../../redux/actions";
 import { v4 as uuidv4 } from "uuid";
 import { todoRemainingSelector } from "../../redux/selector";
+import todosSlice from "../Reducer/TodoListReducer/todosSlice";
 
 const cx = classNames.bind(styles);
 
 function TodoApp() {
   const [todoName, setTodoName] = useState("");
   const TodoList = useSelector(todoRemainingSelector);
-
   const dispatch = useDispatch();
-  console.log(TodoList);
+
   const handleChangeInputValue = (e) => {
     setTodoName(e.target.value);
   };
@@ -24,7 +23,7 @@ function TodoApp() {
   const handleAddBtnClick = () => {
     // dispatch
     dispatch(
-      addTodo({
+      todosSlice.actions.addTodo({
         id: uuidv4(),
         name: todoName,
         completed: false,
