@@ -5,7 +5,7 @@ export default createSlice({
   initialState: [
     { id: 1, name: "Learn Yoga", completed: false },
     { id: 2, name: "Learn JSX", completed: true },
-    { id: 3, name: "Learn Ruby", completed: true },
+    { id: 3, name: "Learn Ruby", completed: false },
   ],
   reducers: {
     addTodo: (state, action) => {
