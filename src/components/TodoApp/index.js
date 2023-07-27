@@ -7,7 +7,7 @@ import FilterByStatus from "../FilterByStatus";
 import TodoItem from "../TodoItem";
 import { v4 as uuidv4 } from "uuid";
 import { todoRemainingSelector } from "../../redux/selector";
-import todosSlice from "../Reducer/TodoListReducer/todosSlice";
+import todosSlice, { addNewTodo } from "../Reducer/TodoListReducer/todosSlice";
 
 const cx = classNames.bind(styles);
 
@@ -21,15 +21,16 @@ function TodoApp() {
   };
 
   const handleAddBtnClick = () => {
-    // dispatch
-    dispatch(
-      todosSlice.actions.addTodo({
-        id: uuidv4(),
-        name: todoName,
-        completed: false,
-      })
-    );
-    setTodoName("");
+    if (todoName !== "") {
+      dispatch(
+        addNewTodo({
+          id: uuidv4(),
+          name: todoName,
+          completed: false,
+        })
+      );
+      setTodoName("");
+    }
   };
 
   return (

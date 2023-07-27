@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classNames from "classnames/bind";
 import styles from "./TodoItem.module.scss";
 import { useDispatch } from "react-redux";
-import todosSlice from "../Reducer/TodoListReducer/todosSlice";
+import todosSlice, { updateTodo } from "../Reducer/TodoListReducer/todosSlice";
 
 const cx = classNames.bind(styles);
 
@@ -15,6 +15,7 @@ function TodoItem({ id, name, completed }) {
   const handleCheckboxChange = () => {
     setChecked(!checked); // Toggle the checked state locally in the component
     dispatch(todosSlice.actions.toggleTodoStatus(id)); // Toggle the completed status
+    // dispatch(updateTodo(id));
   };
 
   const handleChangeValueTodo = (e) => {

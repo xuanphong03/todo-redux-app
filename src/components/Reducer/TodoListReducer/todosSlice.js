@@ -1,12 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export default createSlice({
+const todosSlice = createSlice({
   name: "todoList",
-  initialState: [
-    { id: 1, name: "Learn Yoga", completed: false },
-    { id: 2, name: "Learn JSX", completed: true },
-    { id: 3, name: "Learn Ruby", completed: false },
-  ],
+  initialState: { status: "idle", todos: [] },
   reducers: {
     addTodo: (state, action) => {
       state.push(action.payload);
@@ -26,10 +22,60 @@ export default createSlice({
     },
 
     toggleTodoStatus: (state, action) => {
-      const todoToToggle = state.find((todo) => todo.id === action.payload);
+      const todoToToggle = state.todos.find(
+        (todo) => todo.id === action.payload
+      );
       if (todoToToggle) {
         todoToToggle.completed = !todoToToggle.completed;
       }
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTodos.pending, (state, action) => {
+        state.status = "loading";
+      })
+      .addCase(fetchTodos.fulfilled, (state, action) => {
+        state.todos = action.payload;
+        state.state = "idle";
+      })
+      .addCase(addNewTodo.fulfilled, (state, action) => {
+        state.todos.push(action.payload);
+      });
+    // .addCase(updateTodo.fulfilled, (state, action) => {
+    //   let currentTodo = state.todos.find(
+    //     (todo) => todo.id === action.payload.id
+    //   );
+    //   currentTodo = action.payload;
+    // });
+  },
 });
+
+export default todosSlice;
+
+export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
+  const res = await fetch("/api/todos");
+  const data = await res.json();
+  return data.todos;
+});
+
+export const addNewTodo = createAsyncThunk(
+  "todos/addNewTodo",
+  async (newTodo) => {
+    const res = await fetch("/api/todos", {
+      method: "POST",
+      body: JSON.stringify(newTodo),
+    });
+    const data = await res.json();
+    return data.todos;
+  }
+);
+
+// export const updateTodo = createAsyncThunk("todo/updateTodo", async (id) => {
+//   const res = await fetch("/api/updateTodo", {
+//     method: "POST",
+//     body: JSON.stringify(id),
+//   });
+//   const data = await res.json();
+//   return data.todos;
+// });

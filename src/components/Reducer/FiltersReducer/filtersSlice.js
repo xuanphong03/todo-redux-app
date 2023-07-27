@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export default createSlice({
+const filtersSlice = createSlice({
   name: "filters",
   initialState: {
     search: "",
@@ -15,3 +15,5 @@ export default createSlice({
     },
   },
 });
+
+export default filtersSlice;
